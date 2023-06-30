@@ -3,8 +3,8 @@ from django.db import models
 from django.urls import reverse
 
 class AccountVO(models.Model):
-    email = models.EmailField(null=True)
-    # email = models.EmailField(unique=True, null=True)
+    # email = models.EmailField(null=True)
+    email = models.EmailField(unique=True, null=True)
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
     is_active = models.BooleanField()
