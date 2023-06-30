@@ -3,14 +3,6 @@ from django.urls import reverse
 
 
 class State(models.Model):
-    """
-    The State model represents a US state with its name
-    and abbreviation.
-
-    State is a Value Object and, therefore, does not have a
-    direct URL to view it.
-    """
-
     id = models.PositiveIntegerField(primary_key=True)
     name = models.CharField(max_length=20)
     abbreviation = models.CharField(max_length=2)
@@ -23,10 +15,6 @@ class State(models.Model):
 
 
 class Location(models.Model):
-    """
-    The Location model describes the place at which an
-    Event takes place, like a hotel or conference center.
-    """
 
     name = models.CharField(max_length=200)
     city = models.CharField(max_length=200)
@@ -43,7 +31,7 @@ class Location(models.Model):
     )
 
     def get_api_url(self):
-        return reverse("api_show_location", kwargs={"pk": self.pk})
+        return reverse("api_show_location", kwargs={"id": self.id})
 
     def __str__(self):
         return self.name
@@ -53,13 +41,6 @@ class Location(models.Model):
 
 
 class Conference(models.Model):
-    """
-    The Conference model describes a specific conference.
-    """
-
-    # Has a one-to-many relationship with presentations.Presentation
-    # Has a one-to-many relationship with attendees.Attendee
-
     name = models.CharField(max_length=200)
     starts = models.DateTimeField()
     ends = models.DateTimeField()
@@ -76,7 +57,7 @@ class Conference(models.Model):
     )
 
     def get_api_url(self):
-        return reverse("api_show_conference", kwargs={"pk": self.pk})
+        return reverse("api_show_conference", kwargs={"id": self.id})
 
     def __str__(self):
         return self.name
